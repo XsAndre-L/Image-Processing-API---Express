@@ -9,26 +9,29 @@ imageView.get('/', async (req, res) => {
     //const ImgSize = [Number(req.query.width), Number(req.query.height)];
     if (!req.query.filename || req.query.filename == undefined) {
         res.send('?filename=fjord&width=1000&height=1000');
+        return;
     }
-    const Filename = String(req.query.filename);
 
-    const OutputPath = path.resolve(__dirname, '../../../thumb/output.jpg');
+    const Filename = String(req.query.filename);
 
     // Get the input path with or without extention
     let InputPath: string;
-    
+    let OutputPath: string;
+
     const hasExtension = Filename.includes('.jpg');
     if (hasExtension) {
         InputPath = `./full/${Filename}`;
+        OutputPath = path.resolve(__dirname, `../../../thumb/${Filename}`);
     } else {
         InputPath = `./full/${Filename}.jpg`;
+        OutputPath = path.resolve(__dirname, `../../../thumb/${Filename}.jpg`);
     }
 
-    let image: sharp.OutputInfo;
+    //let image: sharp.OutputInfo;
 
     if (!req.query.width || !req.query.height) {
         const loadImage = async () => {
-            image = await sharp(InputPath).toFile(OutputPath);
+            await sharp(InputPath).toFile(OutputPath);
         };
         await loadImage();
     } else {
@@ -38,7 +41,7 @@ imageView.get('/', async (req, res) => {
         }
 
         const loadImage = async () => {
-            image = await sharp(InputPath)
+            await sharp(InputPath)
                 .resize(ImgSize.x, ImgSize.y)
                 .toFile(OutputPath);
         };
@@ -50,7 +53,6 @@ imageView.get('/', async (req, res) => {
     res.sendFile(OutputPath);
     res.setHeader('cache-control', 'public, max-age=300');
     //res.header('content-disposition', 'attachment; filename="newImage.jpg"');
-    //res.send('output.jpg');
 });
 
 imageView.use(express.static('full'));

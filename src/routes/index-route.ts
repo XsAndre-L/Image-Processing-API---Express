@@ -10,9 +10,6 @@ const routes = express.Router();
 
 // --- ROUTE
 routes.get('/', (req, res) => {
-    //res.send('Main Route');
-
-    //res.sendFile(image);
     res.send('Main Route');
 });
 
