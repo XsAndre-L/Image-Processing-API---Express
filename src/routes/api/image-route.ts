@@ -29,23 +29,28 @@ imageView.get('/', async (req, res) => {
 
     //let image: sharp.OutputInfo;
 
-    if (!req.query.width || !req.query.height) {
-        const loadImage = async () => {
-            await sharp(InputPath).toFile(OutputPath);
-        };
-        await loadImage();
-    } else {
-        enum ImgSize {
-            x = Number(req.query.width),
-            y = Number(req.query.height),
-        }
+    try {
+        if (!req.query.width || !req.query.height) {
+            const loadImage = async () => {
+                await sharp(InputPath).toFile(OutputPath);
+            };
+            await loadImage();
+        } else {
+            enum ImgSize {
+                x = Number(req.query.width),
+                y = Number(req.query.height),
+            }
 
-        const loadImage = async () => {
-            await sharp(InputPath)
-                .resize(ImgSize.x, ImgSize.y)
-                .toFile(OutputPath);
-        };
-        await loadImage();
+            const loadImage = async () => {
+                await sharp(InputPath)
+                    .resize(ImgSize.x, ImgSize.y)
+                    .toFile(OutputPath);
+            };
+            await loadImage();
+        }
+    } catch (error) {
+        res.send(error);
+        return;
     }
 
     //console.log(image);

@@ -1,13 +1,9 @@
 import supertest from 'supertest';
 import app from '../index';
-import routes from '../routes/index-route';
 
 const st = supertest(app);
-// const st = supertest(routes);
-
 
 describe('Test endpoint responses', () => {
-
     // No Quary Strings
     it('Without Quary Strings /image', async () => {
         const response = await st.get('/image/');
@@ -40,6 +36,14 @@ describe('Test endpoint responses', () => {
 
     // File Name & Width & Height
     it('File name & Width & Height /image/?filename=fjord.jpg&width=500&height=500', async () => {
+        const response = await st.get(
+            '/image/?filename=fjord.jpg&width=500&height=500'
+        );
+        expect(response.status).toBe(200);
+    });
+
+    // Unknown Image
+    it('File name & Width & Height /image/?filename=randomname.jpg&width=500&height=500', async () => {
         const response = await st.get(
             '/image/?filename=fjord.jpg&width=500&height=500'
         );

@@ -7,11 +7,6 @@ const port = 3000;
 
 app.use('/', routes);
 
-// app.get('/api', (req, res) => {
-
-//   res.send('works');
-// });
-
 app.listen(port, () => {
     console.log(`Listening on Port ${port}`);
 });
