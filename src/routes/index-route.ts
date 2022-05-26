@@ -4,7 +4,7 @@ import express from 'express';
 import imageView from './api/image-route';
 
 // Middleware
-import imageLogger from '../middleware/imageLogger';
+import imageLogger from '../middleware/image-logger';
 
 const routes = express.Router();
 
@@ -13,7 +13,7 @@ routes.get('/', (req, res) => {
     res.send('Main Route');
 });
 
-routes.use('/image',imageLogger, imageView);
+routes.use('/image', imageLogger, imageView);
 
 // Handle Unkonwn pages to prevent server crashes.
 routes.get('*', (req, res) => {

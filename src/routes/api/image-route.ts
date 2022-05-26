@@ -1,7 +1,10 @@
 import express from 'express';
 import path from 'path';
 
-import { getImage, getManipulatedImage } from '../../services/imageLoader-service';
+import {
+    getImage,
+    getManipulatedImage,
+} from '../../services/image-loader-service';
 
 const imageView = express.Router();
 
@@ -17,7 +20,7 @@ imageView.get('/', async (req, res) => {
     // Get the input path with or without extention
     let inputPath: string;
     let outputPath: string;
-    
+
     const hasExtension = fName.includes('.jpg');
     if (hasExtension) {
         inputPath = `./assets/full/${fName}`;
@@ -34,13 +37,18 @@ imageView.get('/', async (req, res) => {
     }
 
     try {
-        if(req.query.width && req.query.height){
+        if (req.query.width && req.query.height) {
             enum ImgSize {
                 x = Number(req.query.width),
                 y = Number(req.query.height),
             }
-            await getManipulatedImage(inputPath, outputPath, ImgSize.x, ImgSize.y);
-        }else{
+            await getManipulatedImage(
+                inputPath,
+                outputPath,
+                ImgSize.x,
+                ImgSize.y
+            );
+        } else {
             await getImage(inputPath, outputPath);
         }
     } catch (error) {
