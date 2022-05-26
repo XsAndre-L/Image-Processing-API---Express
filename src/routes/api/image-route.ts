@@ -6,7 +6,8 @@ import path from 'path';
 const imageView = express.Router();
 
 imageView.get('/', async (req, res) => {
-    //const ImgSize = [Number(req.query.width), Number(req.query.height)];
+
+    // filename Quary Required
     if (!req.query.filename || req.query.filename == undefined) {
         res.send('?filename=fjord&width=1000&height=1000');
         return;
@@ -20,11 +21,11 @@ imageView.get('/', async (req, res) => {
 
     const hasExtension = Filename.includes('.jpg');
     if (hasExtension) {
-        InputPath = `./full/${Filename}`;
-        OutputPath = path.resolve(__dirname, `../../../thumb/${Filename}`);
+        InputPath = `./assets/full/${Filename}`;
+        OutputPath = path.resolve(__dirname, `../../../assets/thumb/${Filename}`);
     } else {
-        InputPath = `./full/${Filename}.jpg`;
-        OutputPath = path.resolve(__dirname, `../../../thumb/${Filename}.jpg`);
+        InputPath = `./assets/full/${Filename}.jpg`;
+        OutputPath = path.resolve(__dirname, `../../../assets/thumb/${Filename}.jpg`);
     }
 
     //let image: sharp.OutputInfo;
@@ -49,7 +50,7 @@ imageView.get('/', async (req, res) => {
             await loadImage();
         }
     } catch (error) {
-        res.send(error);
+        res.send(`Error while manipulating image ${error}`);
         return;
     }
 
@@ -60,6 +61,6 @@ imageView.get('/', async (req, res) => {
     //res.header('content-disposition', 'attachment; filename="newImage.jpg"');
 });
 
-imageView.use(express.static('full'));
+//imageView.use(express.static('full'));
 
 export default imageView;
