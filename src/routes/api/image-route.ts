@@ -16,6 +16,7 @@ imageView.get('/', async (req, res) => {
     }
 
     const fName = String(req.query.filename);
+    
 
     // Get the input path with or without extention
     let inputPath: string;
@@ -36,6 +37,8 @@ imageView.get('/', async (req, res) => {
         );
     }
 
+    // check if image exists 404    fsPromises module .fileExists()
+
     try {
         if (req.query.width && req.query.height) {
             enum ImgSize {
@@ -52,7 +55,7 @@ imageView.get('/', async (req, res) => {
             await getImage(inputPath, outputPath);
         }
     } catch (error) {
-        res.status(404).send(`Error while manipulating image : ${error}`);
+        res.status(500).send(`Error while manipulating image : ${error}`);
         return;
     }
 
