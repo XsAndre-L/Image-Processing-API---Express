@@ -52,7 +52,7 @@ imageView.get('/', async (req, res) => {
             await getImage(inputPath, outputPath);
         }
     } catch (error) {
-        res.send(`Error while manipulating image : ${error}`);
+        res.status(404).send(`Error while manipulating image : ${error}`);
         return;
     }
 

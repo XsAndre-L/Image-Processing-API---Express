@@ -17,7 +17,7 @@ routes.use('/image', imageLogger, imageView);
 
 // Handle Unkonwn pages to prevent server crashes.
 routes.get('*', (req, res) => {
-    res.send('Unknown Page.');
+    res.status(404).send('Unknown Page.');
 });
 
 export default routes;
