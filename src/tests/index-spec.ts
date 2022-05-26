@@ -51,13 +51,13 @@ describe('Test endpoint responses', () => {
     });
 
     // Different Image
-    it('Different Image /image?filename=encenadaport',async () => {
+    it('Different Image /image?filename=encenadaport', async () => {
         const response = await st.get('/image?filename=encenadaport');
         expect(response.status).toBe(200);
     });
 
     // Unknown Route
-    it('Unknown Route /wrongroute' ,async () => {
+    it('Unknown Route /wrongroute', async () => {
         const response = await st.get('/wrongroute');
         expect(response.status).toBe(200);
     });

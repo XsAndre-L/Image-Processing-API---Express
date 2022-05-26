@@ -4,7 +4,7 @@ import express from 'express';
 import imageView from './api/image-route';
 
 // Middleware
-import imageFetcher from '../utilities/imageFetcher';
+import imageLogger from '../middleware/imageLogger';
 
 const routes = express.Router();
 
@@ -13,15 +13,11 @@ routes.get('/', (req, res) => {
     res.send('Main Route');
 });
 
-routes.use('/image', imageView);
+routes.use('/image',imageLogger, imageView);
 
 // Handle Unkonwn pages to prevent server crashes.
-routes.get('*', (req, res)=>{
-    res.send("Unknown Page.");
-})
-
-
-// Used to view static files within a directory
-// routes.use(express.static('images'), imageView);
+routes.get('*', (req, res) => {
+    res.send('Unknown Page.');
+});
 
 export default routes;
