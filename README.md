@@ -1,0 +1,28 @@
+ ## Build And Run 
+
+1. Install Node Dependencies:  
+ ```bash
+ npm i
+ ```
+
+2. Start Express server  
+```bash
+npm run start
+```
+
+3. In Chrome or any browser paste the following URL:  
+`localhost:3000/image/?filename=fjord`
+
+
+## Notes
+Picture upload directory  
+`assets/full`
+
+
+ Commands: 
+
+ `npm run start`  
+ `npm run test`
+ 
+ To run prettier and eslint  
+ `npm run check`
