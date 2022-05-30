@@ -13,7 +13,7 @@ const routes = express.Router();
 // ROOT route
 routes.get('/', (req, res) => {
     // res.send('Main Route');
-    res.sendFile(path.resolve(__dirname,'../HTML/main-page.html'));
+    res.status(200).sendFile(path.resolve(__dirname, '../HTML/main-page.html'));
 });
 
 // routes.post('/', (req, res)=>{

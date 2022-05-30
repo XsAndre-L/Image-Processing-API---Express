@@ -24,19 +24,22 @@ describe('Test endpoint responses', () => {
     });
 
     // File Name & Width
-    it('File name & Width /image/?filename=fjord.jpg&width=500', async () => { // TODO 
+    it('File name & Width /image/?filename=fjord.jpg&width=500', async () => {
+        // TODO
         const response = await st.get('/image/?filename=fjord.jpg&width=500');
         expect(response.status).toBe(200);
     });
 
     // File Name & Height
-    it('File name & Height /image/?filename=fjord.jpg&height=500', async () => { // TODO
+    it('File name & Height /image/?filename=fjord.jpg&height=500', async () => {
+        // TODO
         const response = await st.get('/image/?filename=fjord.jpg&height=500');
         expect(response.status).toBe(200);
     });
 
     // File Name & Width & Height
-    it('File name & Width & Height /image/?filename=fjord.jpg&width=500&height=500', async () => { // TODO Make more tests testing size and content type header
+    it('File name & Width & Height /image/?filename=fjord.jpg&width=500&height=500', async () => {
+        // TODO Make more tests testing size and content type header
         const response = await st.get(
             '/image/?filename=fjord.jpg&width=500&height=500'
         );
@@ -69,6 +72,5 @@ describe('Test endpoint responses', () => {
         expect(response.status).toBe(404);
     });
 
-
-    // 
+    //
 });
