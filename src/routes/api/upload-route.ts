@@ -14,7 +14,6 @@ let imagesID = 0;
 uploadRoute.route('/')
 .get(async (req, res)=>{
     res.sendFile(path.resolve(__dirname ,'../../HTML/upload.html'));
-    console.log("in get")
 })
 .post(upload.single('filename'),async (req,res,)=>{
 
@@ -23,14 +22,24 @@ uploadRoute.route('/')
     const targetPath = path.resolve(__dirname, `../../../assets/full/image${imagesID}.jpg`);
     
     fs.rename(tempPath, targetPath, err=>{
-        if(err) return;
+        if(err) {
+            res.sendFile(path.resolve(__dirname ,'../../HTML/upload.html'));
+            // res.status(500).end("File Not Uploaded");
+            //console.error(err);
+            console.log('Returning')
+            return;
+            
+        }else{
+
+            imagesID++;
+            res
+                  .status(200)
+                  .contentType("image/jpeg")
+                  .sendFile(targetPath);
+                //   .end("File uploaded!");
+        }
     })
-    
-    imagesID++;
-    res
-          .status(200)
-          .contentType("image/jpeg")
-          .end("File uploaded!");
+
 })
 
 export default uploadRoute;

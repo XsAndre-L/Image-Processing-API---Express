@@ -6,12 +6,14 @@ import uploadRoute from './api/upload-route';
 
 // Middleware
 import imageLogger from '../middleware/image-logger';
+import path from 'path';
 
 const routes = express.Router();
 
 // ROOT route
 routes.get('/', (req, res) => {
-    res.send('Main Route');
+    // res.send('Main Route');
+    res.sendFile(path.resolve(__dirname,'../HTML/main-page.html'));
 });
 
 // routes.post('/', (req, res)=>{

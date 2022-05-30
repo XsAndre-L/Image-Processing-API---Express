@@ -24,5 +24,14 @@ Picture upload directory
  `npm run start`  
  `npm run test`
  
- To run prettier and eslint  
+ To run prettier and eslint together 
  `npm run check`
+
+
+## About
+Project Features:
+- Image Folder Navigator [/image/]
+- Image Uploader [/upload/]
+- Image Viewer [/image/?filename="FILENAME"]
+- Image Resizer [/image/?filename="FILENAME"&width="WIDTH"&height="HEIGHT"]
+

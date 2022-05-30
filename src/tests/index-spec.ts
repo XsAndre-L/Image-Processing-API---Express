@@ -52,7 +52,7 @@ describe('Test endpoint responses', () => {
     // Unknown Image
     it('File name & Width & Height /image/?filename=randomname.jpg&width=500&height=500', async () => {
         const response = await st.get(
-            '/image/?filename=fjord.jpg&width=500&height=500'
+            '/image/?filename=randomname.jpg&width=500&height=500'
         );
         expect(response.status).toBe(404);
     });

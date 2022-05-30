@@ -1,6 +1,7 @@
 import express from 'express';
 import path from 'path';
 import { promises as fsPromises } from 'fs';
+import fs from 'fs';
 
 import {
     getImage,
@@ -12,19 +13,13 @@ const imageView = express.Router();
 imageView.get('/', async (req, res) => {
     // filename Quary Required
     if (!req.query.filename || req.query.filename == undefined) {
-        console.log('in if')
-        //res.send(`?filename=fjord&width=1000&height=1000`);
         const imagePath = path.resolve(__dirname, '../../../assets/full/');
         let bigString = '';
-        // let fileNames: string[];
 
         const fileNames = await fsPromises.readdir(imagePath);
-
         fileNames.forEach(file => {
-            bigString += `<a href="http://localhost:3000/image/?filename=${file}">${file}</a> <br></br>`;
+            bigString += `<a href="http://localhost:3000/image/?filename=${file}&width=&height=">${file}</a> <br></br>`;
         });
-
-
         res.send(`${bigString}`);
 
         return;
@@ -53,12 +48,16 @@ imageView.get('/', async (req, res) => {
     }
 
     // check if image exists 404    fsPromises module .fileExists()
+    if(!fs.existsSync(inputPath)){
+        res.status(404).send(`Image Not Found.`);
+        return;
+    }
 
     try {
         if (req.query.width && req.query.height) {
-            enum ImgSize {
-                x = Number(req.query.width),
-                y = Number(req.query.height),
+            const ImgSize = {
+                x : Number(req.query.width),
+                y : Number(req.query.height)
             }
             await getManipulatedImage(
                 inputPath,
@@ -76,7 +75,7 @@ imageView.get('/', async (req, res) => {
 
     //res.sendFile(path.join(process.env.PWD ?? '' ,'customImages/output.jpg'));
     res.sendFile(outputPath);
-    res.set('Cache-Control', 'public, max-age=31557600');
+    res.set('Cache-Control', 'public, max-age=3000');
     //res.header('content-disposition', 'attachment; filename="newImage.jpg"');
 });
 
