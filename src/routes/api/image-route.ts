@@ -1,5 +1,6 @@
 import express from 'express';
 import path from 'path';
+import { promises as fsPromises } from 'fs';
 
 import {
     getImage,
@@ -11,12 +12,26 @@ const imageView = express.Router();
 imageView.get('/', async (req, res) => {
     // filename Quary Required
     if (!req.query.filename || req.query.filename == undefined) {
-        res.send('?filename=fjord&width=1000&height=1000');
+        console.log('in if')
+        //res.send(`?filename=fjord&width=1000&height=1000`);
+        const imagePath = path.resolve(__dirname, '../../../assets/full/');
+        let bigString = '';
+        // let fileNames: string[];
+
+        const fileNames = await fsPromises.readdir(imagePath);
+
+        fileNames.forEach(file => {
+            bigString += `<a href="http://localhost:3000/image/?filename=${file}">${file}</a> <br></br>`;
+        });
+
+
+        res.send(`${bigString}`);
+
         return;
     }
 
     const fName = String(req.query.filename);
-    
+
 
     // Get the input path with or without extention
     let inputPath: string;

@@ -9,7 +9,7 @@ const uploadRoute = express.Router();
 
 const upload = multer({ dest: './assets/full/' });//{dest: './assets/full/'}
 
-let imagesID: number = 0;
+let imagesID = 0;
 
 uploadRoute.route('/')
 .get(async (req, res)=>{
