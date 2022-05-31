@@ -29,7 +29,7 @@ imageView.get('/', async (req, res) => {
     let inputPath: string;
     let outputPath: string;
 
-    function validCheck(input: string | undefined): number{ // Check if query is valid number and if not return 0
+    function validCheck(input: string): number{ // Check if query is valid number and if not return 0
         const num = Number(input);
         if(num){
             if(isNaN(num)){
@@ -81,7 +81,7 @@ imageView.get('/', async (req, res) => {
             return;
         }
     }
-
+    console.log(outputPath);
     res.sendFile(outputPath);
     res.set('Cache-Control', 'public, max-age=3000');
 

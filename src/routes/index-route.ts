@@ -1,6 +1,7 @@
 import express from 'express';
 
 // Routes
+import thumbRoute from './api/thumb-route';
 import imageView from './api/image-route';
 import uploadRoute from './api/upload-route';
 
@@ -20,9 +21,13 @@ routes.get('/', (req, res) => {
 //     console.log("Post");
 // })
 
+routes.use('/thumb', thumbRoute);
+
 routes.use('/image', imageLogger, imageView);
 
 routes.use('/upload', uploadRoute);
+
+routes.use('/static',express.static(path.resolve(__dirname, '../../assets/thumb')));
 
 // Handle Unkonwn pages to prevent server crashes.
 routes.get('*', (req, res) => {
