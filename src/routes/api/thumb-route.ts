@@ -23,7 +23,11 @@ thumbRoute.get('/', async (req, res) => {
             const w = Number(sizeSegments[0].slice(1));
             const h = Number(sizeSegments[1]);
 
-            bigString += `<a href="/image/?filename=${filename+'.'+filetype}&width=${w}&height=${h}"><img src="/image/?filename=${filename+'.'+filetype}&width=${w}&height=${h}"></a>`;
+            bigString += `<a href="/image/?filename=${
+                filename + '.' + filetype
+            }&width=${w}&height=${h}"><img src="/image/?filename=${
+                filename + '.' + filetype
+            }&width=${w}&height=${h}"></a>`;
         }
     });
     const style = `<style>
@@ -34,7 +38,7 @@ thumbRoute.get('/', async (req, res) => {
         margin: 3px;
         width: 300px;
     }
-</style>`
+</style>`;
 
     const fileAndStyle = style + bigString;
     res.send(`${fileAndStyle}`); // Send images as links

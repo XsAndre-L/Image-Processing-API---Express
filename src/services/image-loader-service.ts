@@ -44,4 +44,3 @@ export async function getManipulatedImage(
     };
     await loadImage();
 }
-

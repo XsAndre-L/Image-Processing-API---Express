@@ -10,15 +10,16 @@
 npm run start
 ```
 
-3. In Chrome or any browser the running server can be accessed on:  
+3. In Chrome or any browser the server can be accessed on:  
 `localhost:3000`
 
 ## About
 Project Features:
-- Image Folder Navigator [/image/]
+- Full size image navigator [/image/]
 - Image Uploader [/upload/]
 - Image Viewer [/image/?filename="FILENAME"]
 - Image Resizer [/image/?filename="FILENAME"&width="WIDTH"&height="HEIGHT"]
+- Thumbnail Viewer [/thumb]
 
 ## Notes
 Picture upload directory  
@@ -34,5 +35,7 @@ To run prettier and eslint together
 To run eslint and prettier individualy
 `npm run lint`
 `npm run prettier`
+
+
 
 

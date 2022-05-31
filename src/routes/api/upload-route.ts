@@ -17,19 +17,18 @@ function validateFileType(
         console.log('File uploading...');
         cb(null, true);
     } else {
-        console.error(`File of type '${file.mimetype}' not supported.`)
+        console.error(`File of type '${file.mimetype}' not supported.`);
         cb(null, false);
         cb(new Error('File Type Not Supported!'));
     }
 }
 const upload = multer({ dest: './assets/full/', fileFilter: validateFileType });
 
-
 uploadRoute
     .route('/')
     .get(async (req, res) => {
         // Serve the HTML page if get req
-        res.sendFile(path.resolve(__dirname, '../../HTML/upload.html'));
+        res.sendFile(path.resolve(__dirname, '../../../HTML/upload.html'));
     })
     .post(upload.single('filename'), async (req, res) => {
         // Image Uploading if post req
@@ -46,14 +45,16 @@ uploadRoute
 
         fs.rename(tempPath, targetPath, (err) => {
             if (err) {
-                console.error(`Error while uploading file : ${err}`)
+                console.error(`Error while uploading file : ${err}`);
                 res.status(500).sendFile(
                     path.resolve(__dirname, '../../HTML/upload.html')
                 );
                 return;
             } else {
                 res.status(200).contentType('image/jpeg').sendFile(targetPath);
-                console.log(`Upload of file "${req.file?.originalname}" Successfull.`)
+                console.log(
+                    `Upload of file "${req.file?.originalname}" Successfull.`
+                );
             }
         });
     });

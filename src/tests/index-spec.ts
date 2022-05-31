@@ -4,42 +4,52 @@ import sharp from 'sharp';
 
 const st = supertest(app);
 
-describe('Test endpoint responses', () => {
-    // No Quary Strings
-    it('Without Quary Strings /image', async () => {
-        const response = await st.get('/image/');
+describe('Test endpoint responses and image resize functionality', () => {
+    // End Points
+    // Root Endpoint
+    it('Root Endpoint /', async () => {
+        const response = await st.get('/');
+        expect(response.status).toBe(200);
+    });
+    // Image Endpoint
+    it('Image Endpoint /image', async () => {
+        const response = await st.get('/image');
+        expect(response.status).toBe(200);
+    });
+    // Upload Endpoint
+    it('Upload Endpoint /upload', async () => {
+        const response = await st.get('/upload');
+        expect(response.status).toBe(200);
+    });
+    // Thumbnail Endpoint
+    it('Thumbnail Endpoint /thumb', async () => {
+        const response = await st.get('/thumb');
         expect(response.status).toBe(200);
     });
 
+    // Image View and Manipulation Functionality
     // File Name & No Extension
     it('File Name & No Extension /image/?filename=fjord', async () => {
         const response = await st.get('/image/?filename=fjord');
         expect(response.status).toBe(200);
     });
-
     // File Name & Extension
     it('File Name & Extension /image/?filename=fjord.jpg', async () => {
         const response = await st.get('/image/?filename=fjord.jpg');
         expect(response.status).toBe(200);
     });
-
     // File Name & Width
     it('File name & Width /image/?filename=fjord.jpg&width=500', async () => {
-        // TODO
         const response = await st.get('/image/?filename=fjord.jpg&width=500');
         expect(response.status).toBe(200);
     });
-
     // File Name & Height
     it('File name & Height /image/?filename=fjord.jpg&height=500', async () => {
-        // TODO
         const response = await st.get('/image/?filename=fjord.jpg&height=500');
         expect(response.status).toBe(200);
     });
-
     // File Name & Width & Height
     it('File name & Width & Height /image/?filename=fjord.jpg&width=500&height=500', async () => {
-        // TODO Make more tests testing size and content type header
         const response = await st.get(
             '/image/?filename=fjord.jpg&width=500&height=500'
         );

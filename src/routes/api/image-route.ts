@@ -64,7 +64,7 @@ imageView.get('/', async (req, res) => {
 
     // check if image exists withing "full" folder , if not 404
     if (!fs.existsSync(inputPath)) {
-        console.error(`Image Not Found at: ${inputPath}`)
+        console.error(`Image Not Found at: ${inputPath}`);
         res.status(404).send(`Image Not Found.`);
         return;
     }
