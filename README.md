@@ -15,7 +15,7 @@ npm run start
 
 ## About
 Endpoints:
-- Root Endpoint [`http://localhost:3000/]
+- Root Endpoint [http://localhost:3000/]
 - Full size image navigator [/image]
     - displays a list of images in "full" directory for easy navigation
 - Image Uploader [/upload]
