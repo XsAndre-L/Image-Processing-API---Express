@@ -13,7 +13,9 @@ const routes = express.Router();
 
 // ROOT route
 routes.get('/', (req, res) => {
-    res.status(200).sendFile(path.resolve(__dirname, '../../HTML/main-page.html'));
+    res.status(200).sendFile(
+        path.resolve(__dirname, '../../HTML/main-page.html')
+    );
 });
 
 routes.use('/thumb', thumbRoute);

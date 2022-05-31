@@ -11,7 +11,7 @@ function validateFileType(
     req: express.Request,
     file: Express.Multer.File,
     cb: multer.FileFilterCallback
-) {
+): void {
     const fileType: string | undefined = file.mimetype;
     if (fileType && (fileType == 'image/png' || fileType == 'image/jpeg')) {
         console.log('File uploading...');
@@ -43,7 +43,7 @@ uploadRoute
             `../../../assets/full/${req.file?.originalname}`
         );
 
-        fs.rename(tempPath, targetPath, (err) => {
+        fs.rename(tempPath, targetPath, (err): fs.NoParamCallback | void => {
             if (err) {
                 console.error(`Error while uploading file : ${err}`);
                 res.status(500).sendFile(

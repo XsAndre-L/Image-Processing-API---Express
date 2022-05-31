@@ -5,14 +5,12 @@ import path from 'path';
 const thumbRoute = express.Router();
 
 thumbRoute.get('/', async (req, res) => {
-    // res.send("Display Thumbnails");
-
     const imagePath = path.resolve(__dirname, '../../../assets/thumb/');
     let bigString = '';
 
     // Get all available images
     const fileNames = await fsPromises.readdir(imagePath);
-    fileNames.forEach((file) => {
+    fileNames.forEach((file): void => {
         if (file != '.gitignore') {
             const stringSegments = file.split('.');
 

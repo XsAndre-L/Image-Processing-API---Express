@@ -7,49 +7,50 @@ const st = supertest(app);
 describe('Test endpoint responses and image resize functionality', () => {
     // End Points
     // Root Endpoint
-    it('Root Endpoint /', async () => {
+    it('Root Endpoint /', async (): Promise<void> => {
         const response = await st.get('/');
         expect(response.status).toBe(200);
     });
     // Image Endpoint
-    it('Image Endpoint /image', async () => {
+    it('Image Endpoint /image', async (): Promise<void> => {
         const response = await st.get('/image');
         expect(response.status).toBe(200);
     });
     // Upload Endpoint
-    it('Upload Endpoint /upload', async () => {
+    it('Upload Endpoint /upload', async (): Promise<void> => {
         const response = await st.get('/upload');
         expect(response.status).toBe(200);
     });
     // Thumbnail Endpoint
-    it('Thumbnail Endpoint /thumb', async () => {
+    it('Thumbnail Endpoint /thumb', async (): Promise<void> => {
         const response = await st.get('/thumb');
         expect(response.status).toBe(200);
     });
 
     // Image View and Manipulation Functionality
     // File Name & No Extension
-    it('File Name & No Extension /image/?filename=fjord', async () => {
+    it('File Name & No Extension /image/?filename=fjord', async (): Promise<void> => {
         const response = await st.get('/image/?filename=fjord');
         expect(response.status).toBe(200);
     });
     // File Name & Extension
-    it('File Name & Extension /image/?filename=fjord.jpg', async () => {
+    it('File Name & Extension /image/?filename=fjord.jpg', async (): Promise<void> => {
         const response = await st.get('/image/?filename=fjord.jpg');
         expect(response.status).toBe(200);
     });
     // File Name & Width
-    it('File name & Width /image/?filename=fjord.jpg&width=500', async () => {
+    it('File name & Width /image/?filename=fjord.jpg&width=500', async (): Promise<void> => {
         const response = await st.get('/image/?filename=fjord.jpg&width=500');
         expect(response.status).toBe(200);
     });
     // File Name & Height
-    it('File name & Height /image/?filename=fjord.jpg&height=500', async () => {
+    it('File name & Height /image/?filename=fjord.jpg&height=500', async (): Promise<void> => {
         const response = await st.get('/image/?filename=fjord.jpg&height=500');
         expect(response.status).toBe(200);
     });
+
     // File Name & Width & Height
-    it('File name & Width & Height /image/?filename=fjord.jpg&width=500&height=500', async () => {
+    it('File name & Width & Height /image/?filename=fjord.jpg&width=500&height=500', async (): Promise<void> => {
         const response = await st.get(
             '/image/?filename=fjord.jpg&width=500&height=500'
         );
@@ -63,7 +64,7 @@ describe('Test endpoint responses and image resize functionality', () => {
     });
 
     // Unknown Image
-    it('File name & Width & Height /image/?filename=randomname.jpg&width=500&height=500', async () => {
+    it('File name & Width & Height /image/?filename=randomname.jpg&width=500&height=500', async (): Promise<void> => {
         const response = await st.get(
             '/image/?filename=randomname.jpg&width=500&height=500'
         );
@@ -71,13 +72,13 @@ describe('Test endpoint responses and image resize functionality', () => {
     });
 
     // Different Image
-    it('Different Image /image?filename=encenadaport', async () => {
+    it('Different Image /image?filename=encenadaport', async (): Promise<void> => {
         const response = await st.get('/image?filename=encenadaport');
         expect(response.status).toBe(200);
     });
 
     // Unknown Route
-    it('Unknown Route /wrongroute', async () => {
+    it('Unknown Route /wrongroute', async (): Promise<void> => {
         const response = await st.get('/wrongroute');
         expect(response.status).toBe(404);
     });
