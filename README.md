@@ -26,21 +26,21 @@ Endpoints:
 - Image Resizer [/image/?filename="FILENAME"&width="WIDTH"&height="HEIGHT"]
 
 ## Notes
-Picture upload directory  
-`assets/full`
-Save thumbnail directory
+Picture upload directory    
+`assets/full`  
+Save thumbnail directory  
 `assets/thumb`
 
 ## Scripts
-`npm run test`
-`npm run start`  
-`npm run build`
+`npm run test`   
+`npm run start`    
+`npm run build`  
 
-To run prettier and eslint together 
+To run prettier and eslint together   
 `npm run check`
 
-To run eslint and prettier individualy
-`npm run lint`
+To run eslint and prettier individualy  
+`npm run lint`  
 `npm run prettier`
 
 
