@@ -47,7 +47,7 @@ uploadRoute
             if (err) {
                 console.error(`Error while uploading file : ${err}`);
                 res.status(500).sendFile(
-                    path.resolve(__dirname, '../../HTML/upload.html')
+                    path.resolve(__dirname, '../../../HTML/upload.html')
                 );
                 return;
             } else {

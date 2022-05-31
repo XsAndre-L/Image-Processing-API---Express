@@ -14,21 +14,28 @@ npm run start
 `localhost:3000`
 
 ## About
-Project Features:
-- Full size image navigator [/image/]
-- Image Uploader [/upload/]
+Endpoints:
+- Root Endpoint [`http://localhost:3000/]
+- Full size image navigator [/image]
+    - displays a list of images in "full" directory for easy navigation
+- Image Uploader [/upload]
+    - accepts .png and .jpg files
+- Thumbnail Viewer [/thumb]
+- Thumbnail Caching saves all different size images due to width and height being part of thumbnail name
 - Image Viewer [/image/?filename="FILENAME"]
 - Image Resizer [/image/?filename="FILENAME"&width="WIDTH"&height="HEIGHT"]
-- Thumbnail Viewer [/thumb]
 
 ## Notes
 Picture upload directory  
 `assets/full`
+Save thumbnail directory
+`assets/thumb`
 
-## Commands
-`npm run start`  
+## Scripts
 `npm run test`
- 
+`npm run start`  
+`npm run build`
+
 To run prettier and eslint together 
 `npm run check`
 
