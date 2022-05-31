@@ -45,9 +45,3 @@ export async function getManipulatedImage(
     await loadImage();
 }
 
-// export async function getImage(filePath: string, newPath: string) {
-//     const loadImage = async () => {
-//         await sharp(filePath).toFile(newPath);
-//     };
-//     await loadImage();
-// }

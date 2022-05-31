@@ -13,13 +13,8 @@ const routes = express.Router();
 
 // ROOT route
 routes.get('/', (req, res) => {
-    // res.send('Main Route');
     res.status(200).sendFile(path.resolve(__dirname, '../HTML/main-page.html'));
 });
-
-// routes.post('/', (req, res)=>{
-//     console.log("Post");
-// })
 
 routes.use('/thumb', thumbRoute);
 
@@ -27,7 +22,7 @@ routes.use('/image', imageLogger, imageView);
 
 routes.use('/upload', uploadRoute);
 
-routes.use('/static',express.static(path.resolve(__dirname, '../../assets/thumb')));
+//routes.use('/static',express.static(path.resolve(__dirname, '../../assets/thumb'))); // method to serve a folder statically
 
 // Handle Unkonwn pages to prevent server crashes.
 routes.get('*', (req, res) => {

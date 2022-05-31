@@ -29,20 +29,21 @@ imageView.get('/', async (req, res) => {
     let inputPath: string;
     let outputPath: string;
 
-    function validCheck(input: string): number{ // Check if query is valid number and if not return 0
+    function validCheck(input: string): number {
+        // Check if query is valid number and if not return 0
         const num = Number(input);
-        if(num){
-            if(isNaN(num)){
+        if (num) {
+            if (isNaN(num)) {
                 return 0;
-            }else{
+            } else {
                 return num;
             }
-        }else{
+        } else {
             return 0;
         }
     }
 
-    const hasExtension = fName.includes('.jpg');
+    const hasExtension = fName.includes('.jpg') || fName.includes('.png');
     const ImgSize = {
         x: validCheck(String(req.query.width)),
         y: validCheck(String(req.query.height)),
@@ -63,6 +64,7 @@ imageView.get('/', async (req, res) => {
 
     // check if image exists withing "full" folder , if not 404
     if (!fs.existsSync(inputPath)) {
+        console.error(`Image Not Found at: ${inputPath}`)
         res.status(404).send(`Image Not Found.`);
         return;
     }
@@ -77,11 +79,12 @@ imageView.get('/', async (req, res) => {
                 ImgSize.y
             );
         } catch (error) {
+            console.error(`Error while manipulating image : ${error}`);
             res.status(500).send(`Error while manipulating image : ${error}`);
             return;
         }
     }
-    console.log(outputPath);
+
     res.sendFile(outputPath);
     res.set('Cache-Control', 'public, max-age=3000');
 
