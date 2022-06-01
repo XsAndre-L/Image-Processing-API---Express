@@ -26,37 +26,46 @@ const upload = multer({ dest: './assets/full/', fileFilter: validateFileType });
 
 uploadRoute
     .route('/')
-    .get(async (req, res) => {
+    .get(async (req: express.Request, res: express.Response): Promise<void> => {
         // Serve the HTML page if get req
         res.sendFile(path.resolve(__dirname, '../../../HTML/upload.html'));
     })
-    .post(upload.single('filename'), async (req, res) => {
-        // Image Uploading if post req
-        const tempPath = path.resolve(
-            __dirname,
-            '../../../',
-            req.file?.path ?? ''
-        );
+    .post(
+        upload.single('filename'),
+        async (req: express.Request, res: express.Response): Promise<void> => {
+            // Image Uploading if post req
+            const tempPath = path.resolve(
+                __dirname,
+                '../../../',
+                req.file?.path ?? ''
+            );
 
-        const targetPath = path.resolve(
-            __dirname,
-            `../../../assets/full/${req.file?.originalname}`
-        );
+            const targetPath = path.resolve(
+                __dirname,
+                `../../../assets/full/${req.file?.originalname}`
+            );
 
-        fs.rename(tempPath, targetPath, (err): fs.NoParamCallback | void => {
-            if (err) {
-                console.error(`Error while uploading file : ${err}`);
-                res.status(500).sendFile(
-                    path.resolve(__dirname, '../../../HTML/upload.html')
-                );
-                return;
-            } else {
-                res.status(200).contentType('image/jpeg').sendFile(targetPath);
-                console.log(
-                    `Upload of file "${req.file?.originalname}" Successfull.`
-                );
-            }
-        });
-    });
+            fs.rename(
+                tempPath,
+                targetPath,
+                (err): fs.NoParamCallback | void => {
+                    if (err) {
+                        console.error(`Error while uploading file : ${err}`);
+                        res.status(500).sendFile(
+                            path.resolve(__dirname, '../../../HTML/upload.html')
+                        );
+                        return;
+                    } else {
+                        res.status(200)
+                            .contentType('image/jpeg')
+                            .sendFile(targetPath);
+                        console.log(
+                            `Upload of file "${req.file?.originalname}" Successfull.`
+                        );
+                    }
+                }
+            );
+        }
+    );
 
 export default uploadRoute;
